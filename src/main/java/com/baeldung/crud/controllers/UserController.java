@@ -23,6 +23,12 @@ public class UserController {
         this.userRepository = userRepository;
     }
     
+    @GetMapping("/")
+    public String index(Model model) {
+        model.addAttribute("users", userRepository.findAll());
+        return "index";
+    }
+    
     @GetMapping("/signup")
     public String showSignUpForm(User user) {
         return "add-user";
@@ -36,7 +42,7 @@ public class UserController {
         
         userRepository.save(user);
         model.addAttribute("users", userRepository.findAll());
-        return "redirect:/index";
+        return "redirect:/";
     }
     
     @GetMapping("/edit/{id}")
@@ -55,7 +61,7 @@ public class UserController {
         
         userRepository.save(user);
         model.addAttribute("users", userRepository.findAll());
-        return "redirect:/index";
+        return "redirect:/";
     }
     
     @GetMapping("/delete/{id}")
