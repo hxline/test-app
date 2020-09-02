@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Transaksi Pembelian Obligasi</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="../../css/shards.min.css">
+    </head>
+    <body>
+        <div th:switch="${users}" class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div th:case="*">
+                        <h2 class="my-5">Transaksi Pembelian Obligasi</h2>
+                        <table class="table table-striped table-responsive-md">
+                            <tbody>
+                                <tr>
+                                    <td>Nomor Pembelian</td>
+                                    <td><input type="text" /></td>
+                                    <td>Nama Surat Hutang</td>
+                                    <td><input type="text" /></td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>Kode Surat Utang</td>
+                                    <td><input type="text" /></td>
+                                    <td>Klarifikasi Utang</td>
+                                    <td><input type="text" /></td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>Kode Pasar</td>
+                                    <td>
+                                        <select>
+                                            <option value="Initial Public Offering (IPO)">Initial Public Offering (IPO)</option>
+                                            <option value="Sekunder">Sekunder</option>
+                                        </select>
+                                    </td>
+                                    <td>Jenis Transaksi</td>
+                                    <td>
+                                        <select>
+                                            <option value="Average">Average</option>
+                                            <option value="SIT">SIT</option>
+                                        </select>
+                                    </td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>Jenis Surat Utang</td>
+                                    <td>
+                                        <select>
+                                            <option value="Surat Utang Negara">Surat Utang Negara</option>
+                                            <option value="Obligasi">Obligasi</option>
+                                        </select>
+                                    </td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>Sekuritas</td>
+                                    <td>
+                                        <select>
+                                            <option value="AI - UOB KAY HIAN SEKURITAS">AI - UOB KAY HIAN SEKURITAS</option>
+                                            <option value="CC - MANDIRI SEKURITAS">CC - MANDIRI SEKURITAS</option>
+                                        </select>
+                                    </td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>Yield</td>
+                                    <td><input type="text" /></td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>Tanggal Transaksi</td>
+                                    <td><input type="date" /></td>
+                                    <td>Tanggal Terakhir Kupon</td>
+                                    <td><input type="date" id="tanggalTerakhirKupon" /></td>
+                                    <td>Nominal</td>
+                                    <td><input type="text" id="nominal" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Tanggal Settlement</td>
+                                    <td><input type="date" id="tanggalSettlement" /></td>
+                                    <td>Tanggal Kupon Selanjutnya</td>
+                                    <td><input type="date" /></td>
+                                    <td>Harga</td>
+                                    <td><input type="text" id="harga" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Tanggal Pengiriman</td>
+                                    <td><input type="date" /></td>
+                                    <td>Tanggal Kupon Pertama Kali</td>
+                                    <td><input type="date" /></td>
+                                    <td>Proceed</td>
+                                    <td><input type="text" id="proceed" readonly /></td>
+                                </tr>
+                                <tr>
+                                    <td>Tanggal Jatuh Tempo</td>
+                                    <td><input type="date" id="tanggalJatuhTempo" /></td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>Kupon</td>
+                                    <td><input type="text" id="kupon" /></td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>Hari Accrued</td>
+                                    <td><input type="text" id="hariAccrued" readonly /></td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>Accrued Interest</td>
+                                    <td><input type="text" id="accruedInterest" readonly /></td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>Biaya</td>
+                                    <td><input type="text" id="biaya" /></td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>Net Proceed</td>
+                                    <td><input type="text" id="netProceed" readonly /></td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>Current Yield</td>
+                                    <td><input type="text" id="currentYield"  /></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>      
+                    <p class="my-5"><a id="btnProcess" class="btn btn-primary">PROCESS</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div>
+                        <h2 class="my-5">Table</h2>
+                        <table id="parentTable" class="table table-striped table-responsive-md">
+                            <tbody id="yieldTable">
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <script>
+            $("#nominal").keyup(function(){
+                proceed();
+                accruedInterest();
+            });
+            $("#harga").keyup(function(){
+                proceed();
+                currentYield();
+            });
+            
+            function proceed() {
+                if ($("#nominal").val() !== "" && $("#harga").val() !== "") {
+                    $("#proceed").val($("#nominal").val()*$("#harga").val()/100);
+                    netProceed();
+                }
+            }
+            
+            $("#tanggalTerakhirKupon").change(function(){
+                hariAccrued();
+            });
+            $("#tanggalSettlement").change(function(){
+                hariAccrued();
+            });
+            
+            function hariAccrued() {
+                if ($("#tanggalSettlement").val() !== "" && $("#tanggalTerakhirKupon").val() !== "") {
+                    var dt1 = new Date($("#tanggalSettlement").val());
+                    var dt2 = new Date($("#tanggalTerakhirKupon").val());
+                    var dtDiff = new Date(dt1 - dt2);
+                    $("#hariAccrued").val(dtDiff/1000/60/60/24);
+                    accruedInterest();
+                }
+            }
+            
+            $("#kupon").keyup(function(){
+                accruedInterest();
+                currentYield();
+            });
+            
+            function accruedInterest() {
+                if ($("#nominal").val() !== "" && $("#hariAccrued").val() !== "" && $("#kupon").val() !== "") {
+                    $("#accruedInterest").val($("#nominal").val() * $("#hariAccrued").val() / 360 * $("#kupon").val());
+                    netProceed();
+                }
+            }
+            
+            $("#biaya").keyup(function(){
+                netProceed();
+            });
+            
+            function netProceed() {
+                var biaya = $("#biaya").val() !== "" ? $("#biaya").val() : 0;
+                if ($("#proceed").val !== "" && $("#accruedInterest").val() !== "") {
+                    $("#netProceed").val(parseFloat($("#proceed").val()) + parseFloat($("#accruedInterest").val()) + parseFloat(biaya));
+                }
+            }
+            
+            function currentYield() {
+                if ($("#kupon").val !== "" && $("#harga").val() !== "") {
+                    $("#currentYield").val($("#kupon").val() / $("#harga").val() * 100);
+                }
+            }
+            
+            $("#btnProcess").click(function(){
+                calculate();
+            });
+            
+            
+            function calculate() {
+                var noUrut = 1;
+                var tahun = 0;
+                var bulan = 0;
+                var hari = 0;
+                var interestKupon = 0;
+                var effectiveInterest = 0;
+                var amortisasiDiskonAkhir = 0;
+                var nilaiAmortisasi = 0;
+                var nominalAmortisasi = 0;
+                var hargaWajar = 0;
+                
+                var nominal = $("#nominal").val();
+                var harga = $("#harga").val();
+                var proceed = $("#proceed").val();
+                var kupon = $("#kupon").val();
+                var currentYield = $("#currentYield").val();
+                var amortisasiDiskon = nominal - proceed;
+                
+                nilaiAmortisasi = amortisasiDiskon;
+                nominalAmortisasi = proceed;
+                
+                var dt1 = new Date($("#tanggalSettlement").val());
+                //var dt2 = new Date($("#tanggalTerakhirKupon").val());
+                var dt3 = new Date($("#tanggalJatuhTempo").val());
+                //var dt4 = new Date(dt1.getFullYear(), dt1.getMonth(),0);
+                
+                var year1 = dt1.getFullYear();
+                var year2 = dt3.getFullYear();
+                
+                var month1 = dt1.getMonth();
+                var month2 = 12;
+                
+                //$("#yieldTable").remove();
+                //$("#parentTable").append('<tbody id="yieldTable"></tbody>');
+                
+                var template = '<tr><td>No Urut</td><td>Tahun</td><td>Bulan</td><td>Hari</td><td>Interest Kupon</td><td>Effective Interest</td><td>Amortisasi Diskon Akhir</td><td>Nilai Amortisasi</td><td>Nominal Amortisasi</td><td>Harga Wajar</td></tr>';
+                
+                for (var i = year1; i <= year2; i++) {
+                    
+                    tahun = i;
+                    for (var j = month1; j <= month2; j++) {
+                        if(noUrut > 1) {
+                            month1 = 1;
+                            hari = 30;
+                            if(i === year2 && j === month2){
+                                hari = 30 - dt3.getDate();
+                            }
+                        } else {
+                            hari = 30 - dt1.getDate();
+                        }
+                        bulan = j;
+                        interestKupon = nominal * (kupon/12/30/100) * hari;
+                        effectiveInterest = nominalAmortisasi * (currentYield/12/30/100) * hari;
+                        amortisasiDiskonAkhir = effectiveInterest - interestKupon;
+                        nilaiAmortisasi -= amortisasiDiskonAkhir;
+                        nominalAmortisasi = parseFloat(nominalAmortisasi) + parseFloat(amortisasiDiskonAkhir);
+                        hargaWajar = nominalAmortisasi/nominal*100;
+                        
+//                        interestKupon = toFixed(interestKupon);
+//                        effectiveInterest = toFixed(effectiveInterest);
+//                        amortisasiDiskonAkhir = toFixed(amortisasiDiskonAkhir);
+//                        nilaiAmortisasi = toFixed(nilaiAmortisasi);
+//                        nominalAmortisasi = toFixed(nominalAmortisasi);
+//                        hargaWajar = toFixed(hargaWajar);
+                        
+                        template += '<tr><td>' + 
+                                noUrut +'</td><td>' + 
+                                tahun + '</td><td>' +
+                                bulan + '</td><td>' + 
+                                hari +'</td><td>' + 
+                                interestKupon.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + '</td><td>' +
+                                effectiveInterest.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + '</td><td>' +
+                                amortisasiDiskonAkhir.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + '</td><td>' +
+                                nilaiAmortisasi.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + '</td><td>' +
+                                nominalAmortisasi.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + '</td><td>' + 
+                                hargaWajar.toFixed(2) + '</td></tr>';
+                        
+                        noUrut++;
+                    }
+                }
+                $("#yieldTable").html(template);
+            }
+        </script>
+    </body>
+</html>
